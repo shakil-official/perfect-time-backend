@@ -14,11 +14,13 @@ class JwtUserMiddleware
     {
         try {
             $token = $request->bearerToken();
+
             $userToken = Auth::guard('web')->setToken($token);
 
             if ($userToken) {
 //                Auth::guard('web')->user();
                 if (Auth::guard('web')->check()) {
+                    $request['user_id'] = Auth::guard('web')->user()->getAuthIdentifier();
                     return $next($request);
                 }
             }
@@ -32,6 +34,7 @@ class JwtUserMiddleware
 
 
         } catch (\Exception $e) {
+
             return response()->json([
                 'data' => [
                     'message' => 'Token is Invalid',

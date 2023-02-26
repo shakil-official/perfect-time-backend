@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models;
+namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +16,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'time_zone', 'time_format', 'available_time'
     ];
 
     /**
@@ -51,4 +51,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public static function AVAILABLETIME()
+    {
+        return '{"hours":[{"value":"Sunday","data":[{"start":9,"end":15}],"available":false},{"value":"Monday","data":[{"start":9,"end":15}],"available":true},{"value":"Tuesday","data":[{"start":9,"end":2}],"available":true},{"value":"Wednesday","data":[{"start":9,"end":15}],"available":true},{"value":"Thursday","data":[{"start":9,"end":15}],"available":true},{"value":"Friday","data":[{"start":9,"end":15}],"available":true},{"value":"Saturday","data":[{"start":9,"end":15}],"available":false}]}';
+    }
+
 }

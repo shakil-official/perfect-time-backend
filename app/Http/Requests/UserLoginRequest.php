@@ -37,7 +37,7 @@ class UserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|max:255|email',
+            'email' => 'required|email|max:255',
             'password' => 'required|max:255',
         ];
     }
@@ -52,6 +52,7 @@ class UserLoginRequest extends FormRequest
         return [
             'email.required' => 'Email is required',
             'password.required' => 'Password is required',
+            'password.email' => 'Email is invalid',
         ];
     }
 }
